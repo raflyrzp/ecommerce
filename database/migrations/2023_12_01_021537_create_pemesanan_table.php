@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamp('tgl_pemesanan');
             $table->integer('jumlah_produk');
             $table->decimal('total_harga', 10, 0);
-            $table->enum('status', ['diproses', 'dikirim', 'diterima']);
+            $table->enum('status', ['pending', 'dibayar', 'dikirim', 'diterima']);
             $table->unsignedBigInteger('id_pengiriman');
             $table->timestamps();
         });

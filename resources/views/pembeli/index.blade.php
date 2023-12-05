@@ -47,7 +47,7 @@
                               <div class="text">
                                   <span class="subheading">#New Arrival</span>
                                   <div class="horizontal">
-                                      <h1 class="mb-4 mt-3">New Shoes Winter Collection</h1>
+                                      <h1 class="mb-4 mt-3">New Bikes Collection</h1>
                                       <p class="mb-4">A small river named Duden flows by their place and supplies it
                                           with the necessary regelialia. It is a paradisematic country.</p>
 
@@ -172,6 +172,7 @@
                                           <input type="hidden" name="id_pembeli" value="{{ auth()->user()->id }}">
                                           <input type="hidden" name="id_produk" value="{{ $produk->id }}">
                                           <input type="hidden" name="harga_produk" value="{{ $produk->harga_produk }}">
+                                          <p>Stock : {{ $produk->stok }}</p>
                                           <div class="mb-3">
                                               <label for="jumlah_produk" class="col-form-label">Qty :</label>
                                               <input type="number" name="jumlah_produk" class="form-control"

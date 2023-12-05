@@ -58,4 +58,7 @@ Route::middleware(['auth', 'userAkses:pembeli'])->group(function () {
 
     Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
     Route::post('/checkout', [CheckoutController::class, 'prosesCheckout'])->name('proses.checkout');
+    // Route::post('/update-quantity', [KeranjangController::class, 'updateQuantity'])->name('updateQuantity');
+
+    Route::get('/checkout-success/{transaction}', [CheckoutController::class, 'success'])->name('checkout-success');
 });

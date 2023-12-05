@@ -28,6 +28,10 @@
     <link rel="stylesheet" href="{{ asset('pembeli/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('pembeli/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('pembeli/css/style.css') }}">
+
+
+
+    @yield('scripts')
 </head>
 
 <body class="goto-here">

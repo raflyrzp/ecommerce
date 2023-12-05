@@ -134,4 +134,5 @@ class KeranjangController extends Controller
 
         return redirect()->route('keranjang.index')->with('success', 'Produk dihapus dari keranjang');
     }
+
 }

@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
+use Midtrans\Config as MidtransConfig;
+use Midtrans\Snap;
+
 class CheckoutController extends Controller
 {
     /**
@@ -73,6 +76,7 @@ class CheckoutController extends Controller
             'kode_pos' => 'required|numeric',
             'id_pengiriman' => 'required'
         ]);
+
         $selectedProductIds = is_array($request->selectedProducts) ? $request->selectedProducts : [$request->selectedProducts];
 
         $selectedProducts = Keranjang::whereIn('id_produk', $selectedProductIds)->get();
@@ -80,28 +84,55 @@ class CheckoutController extends Controller
         $totalPrice = 0;
         foreach ($selectedProducts as $product) {
             $totalPrice += $product->total_harga;
-            $pemesanan = new Pemesanan();
-            $pemesanan->id_pembeli = auth()->user()->id;
-            $pemesanan->id_produk = $product->id_produk;
-            $pemesanan->total_harga = $totalPrice;
-            $pemesanan->jumlah_produk = $product->jumlah_produk;
-            $pemesanan->alamat = $request->alamat;
-            $pemesanan->telp = $request->telp;
-            $pemesanan->provinsi = $request->provinsi;
-            $pemesanan->kota = $request->kota;
-            $pemesanan->kode_pos = $request->kode_pos;
-            $pemesanan->id_pengiriman = $request->id_pengiriman;
-            $pemesanan->email = $request->email;
-            $pemesanan->tgl_pemesanan = now();
-            $pemesanan->save();
-
-            $produk = Produk::find($product->id_produk);
-            $produk->stok -= $product->jumlah_produk;
-            $produk->save();
         }
 
-        Keranjang::whereIn('id_produk', $selectedProductIds)->delete();
 
-        return redirect()->route('home')->with(['success' => 'Berhasil melakukan pembelian!']);
+
+        // Set your Merchant Server Key
+        MidtransConfig::$serverKey = config('midtrans.serverKey');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        MidtransConfig::$isProduction = config('midtrans.isProduction');
+        // Set sanitization on (default)
+        MidtransConfig::$isSanitized = config('midtrans.isSanitized');
+        // Set 3DS transaction for credit card to true
+        MidtransConfig::$is3ds = config('midtrans.is3ds');
+
+        $params = [
+            'transaction_details' => [
+                'order_id' => uniqid(),
+                'gross_amount' => $totalPrice,
+            ],
+            'customer_details' => [
+                'first_name' => auth()->user()->name,
+                'email' => auth()->user()->email,
+            ]
+        ];
+
+        $snapToken = Snap::getSnapToken($params);
+
+        $transactionId = Pemesanan::where('status', 'pending')->get();
+
+        return view('pembeli.payment', [
+            'snapToken' => $snapToken,
+            'totalPrice' => $totalPrice,
+            'transactionId' => $transactionId,
+            'title' => 'Payment'
+        ]);
+    }
+
+    public function success(Pemesanan $transaction)
+    {
+        $transaction->status = 'dibayar';
+        $transaction->save();
+
+        $stokLatest = $transaction->produk->stok - $transaction->jumlah_barang;
+
+        Produk::where('id', $transaction->produk->id)->update([
+            'stok' => $stokLatest,
+        ]);
+
+        return view('pembeli.index', [
+            'transaksis' => Pemesanan::latest()->get(),
+        ])->with('success-payment', 'Pembayaran Berhasil');
     }
 }
