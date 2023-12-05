@@ -139,6 +139,24 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="provinsi" class="col-form-label">Provinsi :</label>
+                                <input type="text" name="provinsi" class="form-control" id="provinsi"
+                                    value="{{ $admin->provinsi }}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="kota" class="col-form-label">Kota :</label>
+                                <input type="text" name="kota" class="form-control" id="kota"
+                                    value="{{ $admin->kota }}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="kode_pos" class="col-form-label">Kode Pos :</label>
+                                <input type="text" name="kode_pos" class="form-control" id="kode_pos"
+                                    value="{{ $admin->kode_pos }}" required>
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="alamat" class="col-form-label">Alamat :</label>
                                 <textarea class="form-control" name="alamat" rows="5" id="alamat" required>{{ $admin->alamat }}</textarea>
                             </div>
@@ -209,6 +227,21 @@
                             <div class="mb-3">
                                 <label for="rekening" class="col-form-label">Rekening :</label>
                                 <input type="text" name="rekening" class="form-control" id="rekening" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="provinsi" class="col-form-label">Provinsi :</label>
+                                <input type="text" name="provinsi" class="form-control" id="provinsi" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="kota" class="col-form-label">Kota :</label>
+                                <input type="text" name="kota" class="form-control" id="kota" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="kode_pos" class="col-form-label">Kode Pos :</label>
+                                <input type="text" name="kode_pos" class="form-control" id="kode_pos" required>
                             </div>
 
                             <div class="mb-3">

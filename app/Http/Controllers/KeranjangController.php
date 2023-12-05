@@ -21,9 +21,18 @@ class KeranjangController extends Controller
 
         $data_keranjang = Keranjang::where('id_pembeli', $id_pembeli)->get();
 
+        $subtotal = 0;
+
+        foreach ($data_keranjang as $keranjang) {
+            $totalHargaPerItem = $keranjang->produk->harga_produk * $keranjang->jumlah_produk;
+            $subtotal += $totalHargaPerItem;
+        }
+
         return view('pembeli.keranjang', [
             'data_keranjang' => $data_keranjang,
-            'title' => 'Keranjang'
+            'subtotal' => $subtotal,
+            'total' => $subtotal,
+            'title' => 'Cart'
         ]);
     }
 
@@ -50,8 +59,7 @@ class KeranjangController extends Controller
         $produk = Produk::find($request->id_produk);
 
         if (!$produk) {
-            // return redirect()->route('home')->with('error', 'Produk tidak ditemukan');
-            abort(403);
+            return redirect()->route('home')->with('error', 'Produk tidak ditemukan');
         }
 
         $jumlah_produk = $request->jumlah_produk;
@@ -72,8 +80,8 @@ class KeranjangController extends Controller
             ]);
         }
 
-        $produk->stok -= $jumlah_produk;
-        $produk->save();
+        // $produk->stok -= $jumlah_produk;
+        // $produk->save();
 
         return redirect()->route('home')->with('success', 'Produk berhasil ditambahkan ke keranjang');
     }

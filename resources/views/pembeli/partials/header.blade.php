@@ -1,51 +1,21 @@
-<!-- Header -->
-<header class="">
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <h2> <img src="{{ asset('pembeli/assets/images/BMW.png') }}" width="50px" alt=""> BMW
-                    <em>64</em>
-                </h2>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item {{ $title === 'Home' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('home') }}">Beranda
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">Tentang</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Kontak</a>
-                    </li>
-                    {{-- <li class="nav-item {{ $title === 'Keranjang' || $title === 'Checkout' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('keranjang.index') }}"><i class="bi bi-cart-fill"></i></a>
-                    </li> --}}
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('pembeli/images/logo.png') }}" width="100px" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
 
-                    <li class="nav-item dropdown {{ $title === 'Keranjang' || $title === 'Checkout' ? 'active' : '' }}">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                src="{{ asset('pembeli/assets/images/client-01.png') }}" class="rounded-circle"
-                                width="23px" height="23px" alt="">&nbsp; {{ auth()->user()->username }}</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item {{ $title === 'Home' ? 'active' : '' }}"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
+                <li class="nav-item {{ $title === 'Shop' ? 'active' : '' }}"><a href="about.html" class="nav-link">Shop</a></li>
+                <li class="nav-item {{ $title === 'About' ? 'active' : '' }}"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item cta cta-colored {{ $title === 'Cart' ? 'active' : '' }}"><a href="{{ route('keranjang.index') }}" class="nav-link"><span
+                            class="icon-shopping_cart"></span>[{{ count(App\Models\Keranjang::all()) }}]</a></li>
 
-                            <a class="dropdown-item" href="{{ route('keranjang.index', auth()->user()->id) }}"><i
-                                    class="bi bi-cart4"></i> Keranjang</a>
-                            <a class="dropdown-item" href="{{ route('pembeli.pemesanan', auth()->user()->id) }}"><i
-                                    class="bi bi-bag-heart"></i> Pemesanan</a>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="return confirm('Anda yakin ingin logout?')"><i
-                                    class="bi bi-box-arrow-left"></i> Log Out</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            </ul>
         </div>
-    </nav>
-</header>
+    </div>
+</nav>
+<!-- END nav -->

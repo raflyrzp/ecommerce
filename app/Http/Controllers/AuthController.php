@@ -58,6 +58,9 @@ class AuthController extends Controller
             'password' => 'required|min:5|max:255',
             'status' => 'required|in:tersedia,habis',
             'alamat' => 'required',
+            'provinsi' => 'required',
+            'kota' => 'required',
+            'kode_pos' => 'required',
             'telepon' => 'required|max:15|numeric'
         ]);
 

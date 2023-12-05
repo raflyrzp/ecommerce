@@ -15,13 +15,17 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_pembeli');
             $table->unsignedBigInteger('id_produk');
+            $table->string('provinsi');
+            $table->string('kota');
+            $table->string('kode_pos');
             $table->string('alamat');
-            $table->string('rekening');
             $table->string('telp');
+            $table->string('email');
             $table->timestamp('tgl_pemesanan');
             $table->integer('jumlah_produk');
             $table->decimal('total_harga', 10, 0);
             $table->enum('status', ['diproses', 'dikirim', 'diterima']);
+            $table->unsignedBigInteger('id_pengiriman');
             $table->timestamps();
         });
     }

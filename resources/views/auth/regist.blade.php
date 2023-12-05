@@ -70,9 +70,9 @@
 
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="form-outline mb-4">
-                                                            <input type="password" id="password"
+                                                            <input type="password" id="confirm_password"
                                                                 class="form-control form-control-lg" />
-                                                            <label class="form-label" name="password"
+                                                            <label class="form-label" name="confirm_password"
                                                                 for="password">Password</label>
                                                         </div>
                                                     </div>
@@ -86,12 +86,47 @@
                                                         for="alamat">Alamat</label>
                                                 </div>
 
-                                                <div class="form-outline mb-4">
-                                                    <input type="text" id="telp"
-                                                        class="form-control form-control-lg" />
-                                                    <label class="form-label" name="telp" value="{{ old('telp') }}"
-                                                        for="telp">No. Telepon</label>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <div class="form-outline mb-4">
+                                                            <input type="text" id="provinsi"
+                                                                class="form-control form-control-lg" />
+                                                            <label class="form-label" name="provinsi"
+                                                                value="{{ old('provinsi') }}"
+                                                                for="provinsi">Province</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <div class="form-outline mb-4">
+                                                            <input type="text" id="kota"
+                                                                class="form-control form-control-lg" />
+                                                            <label class="form-label" name="kota"
+                                                                value="{{ old('kota') }}" for="kota">City</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <div class="form-outline mb-4">
+                                                            <input type="text" id="kode_pos"
+                                                                class="form-control form-control-lg" />
+                                                            <label class="form-label" name="kode_pos"
+                                                                value="{{ old('kode_pos') }}"
+                                                                for="kode_pos">Postcode</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <div class="form-outline mb-4">
+                                                            <input type="text" id="telp"
+                                                                class="form-control form-control-lg" />
+                                                            <label class="form-label" name="telp"
+                                                                value="{{ old('telp') }}"
+                                                                for="telp">Phone</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
 
                                                 <div class="form-outline mb-4">
                                                     <input type="text" id="rekening"

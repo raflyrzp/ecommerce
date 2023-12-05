@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use App\Models\Keranjang;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
@@ -43,7 +44,14 @@ class PemesananController extends Controller
             'tgl_pemesanan' => 'required|date',
             'total_harga' => 'required|numeric',
             'jumlah_produk' => 'required|integer',
-            'status' => 'required|in:diproses,dikirim,diterima'
+            'status' => 'required|in:diproses,dikirim,diterima',
+            'provinsi' => 'required|string',
+            'kota' => 'required|string',
+            'kode_pos' => 'required|string',
+            'alamat' => 'required|string',
+            'telp' => 'required|string',
+            'email' => 'required|email',
+            'id_pengiriman' => 'required|integer'
         ]);
 
         $id_pembeli = Auth::id();
@@ -62,8 +70,16 @@ class PemesananController extends Controller
             'jumlah_produk' => $produk_dipesan->jumlah_produk,
             'total_harga' => $produk_dipesan->total_harga,
             'status' => 'diproses',
+            'provinsi' => $request->provinsi,
+            'kota' => $request->kota,
+            'kode_pos' => $request->kode_pos,
+            'alamat' => $request->alamat,
+            'telp' => $request->telp,
+            'email' => $request->email,
+            'id_pengiriman' => $request->id_pengiriman,
         ]);
 
+       
         $produk_dipesan->delete();
 
         return redirect()->route('keranjang.index')->with('success', 'Pemesanan berhasil dibuat');
@@ -96,7 +112,14 @@ class PemesananController extends Controller
             'tgl_pemesanan' => 'required|date',
             'total_harga' => 'required|numeric',
             'jumlah_produk' => 'required|integer',
-            'status' => 'required|in:diproses,dikirim,diterima'
+            'status' => 'required|in:diproses,dikirim,diterima',
+            'provinsi' => 'required|string',
+            'kota' => 'required|string',
+            'kode_pos' => 'required|string',
+            'alamat' => 'required|string',
+            'telp' => 'required|string',
+            'email' => 'required|email',
+            'id_pengiriman' => 'required|integer'
         ]);
 
         $pemesanan = Pemesanan::findOrFail($id);
@@ -108,6 +131,13 @@ class PemesananController extends Controller
             'jumlah_produk' => $request->jumlah_produk,
             'total_harga' => $request->total_harga,
             'status' => $request->status,
+            'provinsi' => $request->provinsi,
+            'kota' => $request->kota,
+            'kode_pos' => $request->kode_pos,
+            'alamat' => $request->alamat,
+            'telp' => $request->telp,
+            'email' => $request->email,
+            'id_pengiriman' => $request->id_pengiriman,
         ]);
 
         return redirect()->route('pemesanan.index')->with('success', 'Berhasil mengupdate sebuah pemesanan.');

@@ -39,7 +39,10 @@ class UserController extends Controller
             'password' => 'required|min:6',
             'telp' => 'required|numeric',
             'rekening' => 'required|numeric',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'provinsi' => 'required',
+            'kota' => 'required',
+            'kode_pos' => 'required|numeric',
         ]);
 
         User::create([
@@ -50,6 +53,9 @@ class UserController extends Controller
             'telp' => $request->telp,
             'rekening' => $request->rekening,
             'alamat' => $request->alamat,
+            'provinsi' => $request->provinsi,
+            'kota' => $request->kota,
+            'kode_pos' => $request->kode_pos,
             'join_date' => now(),
             'password' => Hash::make($request->password),
         ]);
@@ -66,7 +72,10 @@ class UserController extends Controller
             'telp' => 'required|numeric',
             'role' => 'in:admin,pembeli',
             'rekening' => 'required|numeric',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'provinsi' => 'required',
+            'kota' => 'required',
+            'kode_pos' => 'required',
         ]);
 
         $user = User::find($id);
@@ -82,6 +91,9 @@ class UserController extends Controller
         $user->telp = $request->telp;
         $user->rekening = $request->rekening;
         $user->alamat = $request->alamat;
+        $user->provinsi = $request->provinsi;
+        $user->kota = $request->kota;
+        $user->kode_pos = $request->kode_pos;
 
         if ($request->password) {
             $request->validate([
